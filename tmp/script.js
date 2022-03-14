@@ -1,6 +1,6 @@
 var cubeRotation = 0.0;
 
-
+const shift = 2;
 
 
 function convertorRGB(R,G,B)
@@ -111,6 +111,11 @@ window.onload = function main() {
                 case 'Digit6':
                     clier();
                     allRotate=1;
+                    break;
+
+                case 'Digit7':
+                    clier();
+                    allRotate=2;
                     break;
 
             }  
@@ -245,6 +250,24 @@ function drawCube(gl, programInfo, buffers, deltaTime, projectionMatrix, transla
         modelViewMatrix,
         [translateList[0] - c[0], translateList[1] - c[1], translateList[2] - c[2]]);
     }
+
+    if(allRotate === 2){
+
+        mat4.translate(modelViewMatrix,
+            modelViewMatrix,
+            [c[0] - translateList[0]+shift, c[1] - translateList[1], c[2] - translateList[2]+shift]);
+    
+        
+        mat4.rotate(modelViewMatrix,
+                modelViewMatrix,
+                cubeRotation,
+                [0,1,0]);
+        
+        mat4.translate(modelViewMatrix,
+            modelViewMatrix,
+            [translateList[0] - c[0]+shift, translateList[1] - c[1], translateList[2] - c[2]+shift]);
+        }
+
 
 
     {
